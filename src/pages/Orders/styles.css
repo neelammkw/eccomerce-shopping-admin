@@ -1,0 +1,177 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f6fa;
+  }
+  
+  .mc-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .mc-invoice-head {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .mc-invoice-head img {
+    max-width: 120px;
+    margin-bottom: 10px;
+  }
+  
+  .mc-invoice-head h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+  
+  .mc-invoice-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .mc-invoice-recieved,
+  .mc-invoice-shipment {
+    width: 48%;
+  }
+  
+  .mc-invoice-recieved h6,
+  .mc-invoice-shipment h6 {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  
+  .mc-invoice-recieved p,
+  .mc-invoice-shipment p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .mc-table-responsive {
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  
+  .mc-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .mc-table th,
+  .mc-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .mc-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .mc-table td {
+    font-size: 14px;
+  }
+  
+  .mc-table-product.sm {
+    display: flex;
+    align-items: center;
+  }
+  
+  .mc-table-product img {
+    max-width: 40px;
+    margin-right: 10px;
+  }
+  
+  .mc-invoice-list-group {
+    margin-bottom: 20px;
+  }
+  
+  .mc-invoice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mc-invoice-list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .mc-invoice-list li .title {
+    font-weight: bold;
+  }
+  
+  .mc-invoice-list li .digit {
+    font-weight: bold;
+  }
+  
+  .mc-invoice-list li .digit.total {
+    color: #27ae60;
+  }
+  
+  .mc-invoice-note {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .mc-invoice-btns {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .mc-invoice-btns .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+  }
+  
+  .mc-invoice-btns .btn-dark {
+    background-color: #333;
+  }
+  
+  .mc-invoice-btns .btn-success {
+    background-color: #27ae60;
+  }
+  
+  .mc-invoice-btns .btn i {
+    margin-right: 5px;
+    font-size: 18px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .mc-invoice-group {
+      flex-direction: row;
+    }
+    .mc-invoice-recieved,
+    .mc-invoice-shipment {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    .mc-invoice-btns {
+      flex-direction: column;
+    }
+    .mc-invoice-btns .btn {
+      margin-bottom: 10px;
+    }
+  }
+  

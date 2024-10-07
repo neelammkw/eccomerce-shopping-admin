@@ -1,0 +1,201 @@
+.productItem {
+  padding-left: 5px !important;
+  width: 100% !important;
+  height: auto !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+}
+.slick-dots {
+  position: absolute;
+  bottom: -18px;
+  margin-bottom: 0px !important;
+}
+.productItem .badge {
+  display: inline-block;
+  align-items: center;
+  padding: 7px 10px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.productItem .badge-primary {
+  background: #65c7ee !important;
+  justify-content: center;
+  width: 40px;
+  height: 25px;
+}
+
+.productItem .actions {
+  position: absolute;
+  top: 10px;
+  right: -39.5px;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 10;
+}
+
+.productItem:hover .actions {
+  opacity: 1;
+  right: 10px;
+}
+
+.productItem .imgWrapper {
+  width: 100% !important;
+}
+
+.productItem .imgWrapper img {
+  width: 181px !important;
+  transition: transform 0.3s ease-in-out;
+}
+
+.productItem .slick-slide {
+  width: 181px !important;
+  height: 160px !important;
+}
+
+.productItem .sliderImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.productItem h4 {
+  padding-left: 5px;
+  display: block;
+  width: 200px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.productItem .actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 40px !important;
+  height: 40px !important;
+  width: 40px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50% !important;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.productItem .actions button:hover {
+  background: #ecd95f;
+}
+
+.productItem .slider {
+  padding-bottom: 0px !important;
+  padding-right: 12px !important;
+}
+
+.productItem div {
+  padding-bottom: 0px !important;
+  padding-left: 2px;
+}
+
+.ratings {
+  display: flex;
+}
+
+.ratings .MuiRating-icon {
+  margin-right: 4px; /* Adjust the space between stars */
+}
+
+.ratings .MuiRating-icon:last-child {
+  margin-right: 0;
+}
+
+.product_Listing_Page .productListing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product_Listing_Page .productListing .productItem {
+  overflow: hidden;
+  margin-bottom: 8px !important;
+}
+
+.product_Listing_Page .productListing .productItem.four {
+  width: 22.5% !important;
+}
+
+.product_Listing_Page .productListing .productItem.three {
+  width: 31% !important;
+}
+
+.product_Listing_Page .productListing .productItem.two {
+  width: 48% !important;
+}
+
+.product_Listing_Page .productListing .productItem.one {
+  width: 80% !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.product_Listing_Page .productListing .productItem.one img {
+  width: 200px !important;
+  height: 240px !important;
+}
+
+.product_Listing_Page .productListing .productItem.one .imgWrapper{
+  width: 189px !important;
+  height: 200px !important;
+}
+.product_Listing_Page .productListing .productItem.three .imgWrapper{
+  width: 189px !important;
+  height: 180px !important;
+}.product_Listing_Page .productListing .productItem.three .imgWrapper:hover img{
+  width: 189px !important;
+  height: 180px !important;
+}
+.product_Listing_Page .productListing .productItem.three .slick-slide{
+  width: 180px !important;
+  height: 180px !important;
+}
+.product_Listing_Page .productListing .productItem.two{
+  height: 210px !important;
+}
+
+.product_Listing_Page .productListing .productItem.one .imgWrapper .slick-slide {
+  width: 185px !important;
+  height: 250px !important;
+  padding: 0px !important;
+
+}
+.product_Listing_Page .productListing .productItem.one .details .info{ 
+  padding-left: 30px !important;
+}
+
+.product_Listing_Page .productListing .productItem.one .imgWrapper:hover img{
+  width: 195px !important;
+  height: 250px;
+}
+
+.product_Listing_Page .productListing .productItem .imgWrapper {
+  width: 210px;
+  height: 180px;
+}
+
+.product_Listing_Page .productListing .productItem .imgWrapper img {
+  width: 220px;
+  object-fit: cover;
+}
+.product_Listing_Page .productListing .productItem .imgWrapper a {
+}
+
+.product_Listing_Page .productListing .productItem .details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details .slider,
+.details .slider img {
+  width: 200px !important;
+  margin-bottom: 15px !important;
+}
