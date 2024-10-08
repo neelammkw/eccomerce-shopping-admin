@@ -9,7 +9,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { fetchDataFromApi, updateOrderStatus } from "../../utils/api";
 import { MyContext } from "../../App";
-import { MdShoppingBag } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { FaTruck } from "react-icons/fa";
 import { IoBagCheckSharp } from "react-icons/io5";

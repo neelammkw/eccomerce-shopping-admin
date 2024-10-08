@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import {
-  FaUserCircle,
   FaEye,
   FaPencilAlt,
   FaShoppingBag,
@@ -26,7 +25,6 @@ const ProductList = () => {
   const [brands, setBrands] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalCategories, setTotalCategories] = useState(0);
-  const [totalBrands, setTotalBrands] = useState(0);
   const [showBy, setShowBy] = useState(10);
   const [showByCat, setShowByCat] = useState("");
   const [showBrand, setShowBrand] = useState("");
@@ -35,7 +33,6 @@ const ProductList = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const navigate = useNavigate();
 
   useEffect(() => {
     context.setProgress(40);
@@ -52,7 +49,7 @@ const ProductList = () => {
       setCategories(res);
       setTotalCategories(res.length); // Dynamically setting total categories
     });
-  }, []);
+  }, [context]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

@@ -1,16 +1,14 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Rating from "@mui/material/Rating";
 import Select from "@mui/material/Select";
-import { Button, TextField } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import { MdOutlineCancel } from "react-icons/md";
 import MuiAlert from "@mui/material/Alert";
 import { RxDividerVertical } from "react-icons/rx";
-import { fetchCategories, fetchSubcategories, postProduct } from "../../utils/api";
+import { fetchCategories, postProduct } from "../../utils/api";
 import { FaRegImages } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -128,7 +126,7 @@ const removeImage = (index) => {
         URL.revokeObjectURL(objectUrls[i]);
       };
     }
-  }, [imgFiles]);
+  }, [imgFiles, files.length]);
 
   useEffect(() => {
     const fetchCategory = async () => {

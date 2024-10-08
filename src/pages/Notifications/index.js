@@ -61,7 +61,7 @@ const NotificationDetails = () => {
     };
 
     fetchNotificationDetails();
-  }, [Id]);
+  }, [Id, markAsRead]);
 
   if (loading) {
     return <CircularProgress />;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { FaUserEdit, FaEye, FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import {  FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import Button from "@mui/material/Button";
 import Pagination from "@mui/material/Pagination";
 import Snackbar from "@mui/material/Snackbar";
@@ -23,7 +23,7 @@ const Users = () => {
       context.setProgress(100);
       setUsers(res);
     });
-  }, []);
+  }, [context]);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

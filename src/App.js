@@ -95,9 +95,7 @@ function App() {
     const [isHideSideandHeader, setHideSideandHeader] = useState(false);
     const { enqueueSnackbar } = useSnackbar();
     const [themeMode, setThemeMode] = useState(true);
-    const topLoadingBar = useRef(null);
     const [progress, setProgress] = useState(0);
-    const [baseUrl, setBaseUrl] = useState("https://ecommerce-shopping-server.onrender.com/");
     const [user, setUser] = useState(() => {
       const storedUser = localStorage.getItem("user");
       return storedUser ? JSON.parse(storedUser) : null;
@@ -158,7 +156,6 @@ function App() {
       setThemeMode,
       handleClickVariant,
       setProgress,
-      baseUrl,
       user,
       setUser,
     };

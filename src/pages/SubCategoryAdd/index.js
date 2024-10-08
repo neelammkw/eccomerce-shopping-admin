@@ -1,17 +1,14 @@
 import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { RxDividerVertical } from "react-icons/rx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { postData, fetchCategories } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-import { MyContext } from "../../App";
-import axios from "axios";
 
 const SubCategoryAdd = () => {
   const [categoryVal, setCategoryVal] = useState("");
@@ -39,12 +36,11 @@ const SubCategoryAdd = () => {
 
   const addSubCategory = async (e) => {
     e.preventDefault();
- const formdata = new FormData();
 
     if (formfield.subcat !== "" && formfield.category !== "") {
       setLoading(true);
       try {
-        const res = await postData("/api/subcategories/create", formfield);
+       await postData("/api/subcategories/create", formfield)
         toast.success("Subcategory added successfully!");
         history("/subcategory-list");
       } catch (error) {

@@ -17,7 +17,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
 import { MyContext } from "../../App";
-import { fetchDataFromApi, updateNotificationStatus } from "../../utils/api";
+import { fetchDataFromApi } from "../../utils/api";
 import { OrdersContext } from "../../App";
 import { NotificationsContext } from "../../App";
 
@@ -91,7 +91,7 @@ const Header = () => {
     };
 
     fetchNotifications();
-  }, [setNotifications]);
+  }, [setNotifications, setUnreadNotificationsCount]);
 
   // Fetch pending orders
   useEffect(() => {
@@ -123,7 +123,7 @@ const Header = () => {
     intervalId = setInterval(fetchOrders, 10000);
 
     return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, [orders, updateOrderStats]);
+  }, [orders, setOrders, updateOrderStats, setPendingOrdersCount, setPendingOrders]);
 
   return (
     <>

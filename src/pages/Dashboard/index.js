@@ -53,7 +53,6 @@ const Dashboard = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
   const context = useContext(MyContext);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Consolidated fetch for both orders and dashboard data
@@ -99,7 +98,7 @@ const Dashboard = () => {
   // Use the function
   useEffect(() => {
     fetchAndCalculateSales();
-  }, []);
+  }, [fetchAndCalculateSales]);
 
   useEffect(() => {
     context.setProgress(40);
@@ -111,7 +110,7 @@ const Dashboard = () => {
       const uniqueBrands = [...new Set(res.map((item) => item.brand))]; // Fetching unique brands
       setBrands(uniqueBrands);
     });
-  }, []);
+  }, [context]);
 
   useEffect(() => {
     const fetchCategory = async () => {

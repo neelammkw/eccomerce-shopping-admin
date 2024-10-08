@@ -2,12 +2,9 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 import {
-  InputLabel,
   MenuItem,
   Rating,
   Select,
-  Button,
-  TextField,
   Snackbar,
   CircularProgress,
 } from "@mui/material";
@@ -609,7 +606,7 @@ const ProductEdit = () => {
                           <div className="uploadBox" key={index}>
                             <img
                               src={`${context.baseUrl}uploads/${image}`}
-                              className="w-100"
+                              className="w-100" alt="img"
                             />
                           </div>
                         );
@@ -619,7 +616,7 @@ const ProductEdit = () => {
                       previews.map((image, index) => {
                         return (
                           <div className="uploadBox" key={index}>
-                            <img src={`${image}`} className="w-100" />
+                            <img src={`${image}`} className="w-100" alt="img"/>
                           </div>
                         );
                       })}

@@ -39,7 +39,7 @@ const NotificationsList = () => {
         setNotification([]);
         context.setProgress(100);
       });
-  }, []);
+  }, [context]);
 
   // Handle notification read status change
   const handleMarkAsRead = async (Id) => {

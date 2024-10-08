@@ -157,13 +157,13 @@ const Category = () => {
     setCurrentPage(value);
     context.setProgress(100);
   };
-  const handleSelectChange = (e) => {
-    const { value } = e.target;
-    setSelectedCategory((prev) => ({
-      ...prev,
-      parentCategory: value,
-    }));
-  };
+  // const handleSelectChange = (e) => {
+  //   const { value } = e.target;
+  //   setSelectedCategory((prev) => ({
+  //     ...prev,
+  //     parentCategory: value,
+  //   }));
+  // };
 
 
   return (
@@ -341,7 +341,7 @@ const Category = () => {
               {previews?.length !== 0 &&
                 previews?.map((img, index) => (
                   <div className="uploadBox" key={index}>
-                    <img src={img} className="w-100" />
+                    <img src={img} className="w-100" alt="image"/>
                   </div>
                 ))}
               <div className="uploadBox">

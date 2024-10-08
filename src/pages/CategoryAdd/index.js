@@ -86,7 +86,7 @@ const CategoryAdd = () => {
     return () => {
       objectUrls.forEach((url) => URL.revokeObjectURL(url));
     };
-  }, [imgFiles]);
+  }, [imgFiles, files.length]);
 
   const removeImage = (index) => {
     const newFiles = files.filter((_, i) => i !== index);
@@ -118,8 +118,8 @@ const CategoryAdd = () => {
     ) {
       setLoading(true);
       try {
-        console.log(formfield); // Log the response to inspect its structure
-        const res = await postData("/api/categories/create", formfield);
+        // console.log(formfield); // Log the response to inspect its structure
+         await postData("/api/categories/create", formfield)
 
         // setLoading(false);
 
