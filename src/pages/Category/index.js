@@ -21,7 +21,7 @@ import axios from "axios";
 const Category = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [categories, setCategories] = useState([]);
-  const [allCategories, setAllCategories] = useState([]);
+ const [allCategories, setAllCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
@@ -121,7 +121,7 @@ const Category = () => {
       setOpenEditDialog(false);
       fetchCategories("/api/categories").then((res) => {
         setCategories(res);
-        setAllCategories(res);
+        // setAllCategories(res);
       });
     } catch (error) {
       enqueueSnackbar("Error editing category. Please try again.", { variant: "error" });

@@ -27,7 +27,6 @@ import Notifications from "./pages/Notifications";
 import NotificationsList from "./pages/NotificationsList";
 import { SnackbarProvider, useSnackbar } from "notistack";
 import LoadingBar from "react-top-loading-bar";
-import { useRef } from "react";
 import { fetchDataFromApi } from "./utils/api";
 
 // Create Contexts at the top level
