@@ -150,7 +150,7 @@ const Category = () => {
       setAllCategories(res);
       context.setProgress(100);
     });
-  }, [currentPage, itemsPerPage, context]);
+  }, [currentPage, itemsPerPage, context, setAllCategories]);
 
   const handlePageChange = (event, value) => {
     context.setProgress(10);

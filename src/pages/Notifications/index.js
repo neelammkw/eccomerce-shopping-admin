@@ -45,7 +45,7 @@ const NotificationDetails = () => {
   } catch (error) {
     console.error("Error marking notification as read:", error);
   }
-}, [Id, updateNotificationStatus]);
+}, [Id, updateNotificationStatus, setNotifications, setUnreadNotificationsCount]);
   useEffect(() => {
     const fetchNotificationDetails = async () => {
       try {

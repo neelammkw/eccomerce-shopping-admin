@@ -10,7 +10,6 @@ import {
   deleteNotification,
 } from "../../utils/api";
 import { MyContext } from "../../App";
-import { OrdersContext } from "../../App";
 import { NotificationsContext } from "../../App";
 
 const NotificationsList = () => {

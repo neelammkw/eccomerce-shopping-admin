@@ -22,7 +22,6 @@ const ProductEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const context = useContext(MyContext);
-  const productImages = useRef();
 
   const [categoryVal, setCategoryVal] = useState("");
   const [subCategories, setSubCategories] = useState([]);
@@ -35,7 +34,6 @@ const ProductEdit = () => {
   const [ setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
-  const [ setproductImagesArr] = useState([]);
   const [formField, setFormField] = useState({
     name: "",
     images: [],
@@ -58,7 +56,7 @@ const ProductEdit = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [formdata, setFormData] = useState(new FormData());
+  const [ setFormData] = useState(new FormData());
 
   const postData = async (url, formData) => {
     try {
@@ -175,7 +173,7 @@ const ProductEdit = () => {
     setFiles([]);
     setImgFiles(null);
     setPreviews([]);
-  }, [id, setImages]);
+  }, [id, setImages, setFiles]);
 
   const handleChangeSubCat = (event) => {
     const { value } = event.target;

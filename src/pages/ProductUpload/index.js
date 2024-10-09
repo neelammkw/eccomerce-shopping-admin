@@ -11,7 +11,6 @@ import { RxDividerVertical } from "react-icons/rx";
 import { fetchCategories, postProduct } from "../../utils/api";
 import { FaRegImages } from "react-icons/fa";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -26,12 +25,10 @@ const ProductUpload = () => {
   const [ setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const productImages = useRef();
 
   const [files, setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
-  const [ setProductImagesArr] = useState([]);
   const [formField, setFormField] = useState({
     name: "",
     images: [],

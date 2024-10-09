@@ -85,7 +85,7 @@ useEffect(() => {
   };
 
   fetchAndCalculateSales();
-}, []); // Dependency array here controls when this effect runs
+}, [setTotalSales]); // Dependency array here controls when this effect runs
 
   // Updated calculateTotalSales function
   const calculateTotalSales = (orders) => {
@@ -113,7 +113,7 @@ useEffect(() => {
       const uniqueBrands = [...new Set(res.map((item) => item.brand))]; // Fetching unique brands
       setBrands(uniqueBrands);
     });
-  }, [context]);
+  }, [context, setProducts]);
 
   useEffect(() => {
     const fetchCategory = async () => {
