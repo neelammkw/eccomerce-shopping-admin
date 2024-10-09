@@ -50,6 +50,8 @@ const Dashboard = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [totalSales, setTotalSales] = useState(0); // Add this state to store total sales
+
 
   const context = useContext(MyContext);
 
@@ -70,11 +72,10 @@ useEffect(() => {
   const fetchAndCalculateSales = async () => {
     try {
       const ordersResponse = await fetchDataFromApi("/api/order");
-
       if (ordersResponse && Array.isArray(ordersResponse)) {
-        setOrders(ordersResponse); // Setting the orders to state
-         calculateTotalSales(ordersResponse); // Passing the fetched orders to the function
-        setTotalSales(totalSales); // Assuming you want to set the calculated total sales to state
+        setOrders(ordersResponse); // Set orders
+        const totalSalesValue = calculateTotalSales(ordersResponse); // Calculate sales
+        setTotalSales(totalSalesValue); // Set total sales in state
       } else {
         console.error("Invalid order data:", ordersResponse);
       }
@@ -84,7 +85,7 @@ useEffect(() => {
   };
 
   fetchAndCalculateSales();
-}, [fetchAndCalculateSales]); // Add necessary dependencies here, or leave empty for once-on-mount behavior
+}, []); // Dependency array here controls when this effect runs
 
   // Updated calculateTotalSales function
   const calculateTotalSales = (orders) => {
