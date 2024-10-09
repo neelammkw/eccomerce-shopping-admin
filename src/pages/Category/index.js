@@ -23,7 +23,7 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
  const [ setAllCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
 
   const [openViewDialog, setOpenViewDialog] = useState(false);
@@ -150,7 +150,7 @@ const Category = () => {
       setAllCategories(res);
       context.setProgress(100);
     });
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, context]);
 
   const handlePageChange = (event, value) => {
     context.setProgress(10);
@@ -341,7 +341,7 @@ const Category = () => {
               {previews?.length !== 0 &&
                 previews?.map((img, index) => (
                   <div className="uploadBox" key={index}>
-                    <img src={img} className="w-100" alt="image"/>
+                    <img src={img} className="w-100" alt={img}/>
                   </div>
                 ))}
               <div className="uploadBox">

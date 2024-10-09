@@ -32,10 +32,10 @@ const ProductEdit = () => {
   const [ setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [ setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
-  const [productImagesArr, setproductImagesArr] = useState([]);
+  const [ setproductImagesArr] = useState([]);
   const [formField, setFormField] = useState({
     name: "",
     images: [],
@@ -175,7 +175,7 @@ const ProductEdit = () => {
     setFiles([]);
     setImgFiles(null);
     setPreviews([]);
-  }, [id]);
+  }, [id, setImages]);
 
   const handleChangeSubCat = (event) => {
     const { value } = event.target;
@@ -204,14 +204,7 @@ const ProductEdit = () => {
     }
   };
 
-  const addProductImages = () => {
-    setproductImagesArr((prevArray) => [
-      ...prevArray,
-      productImages.current.value,
-    ]);
-    productImages.current.value = "";
-  };
-
+  
   const handleChangeBrand = (event) => {
     setFormField((prevFormField) => ({
       ...prevFormField,

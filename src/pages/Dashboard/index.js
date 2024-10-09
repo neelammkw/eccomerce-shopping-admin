@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { FaEye, FaPencilAlt } from "react-icons/fa";
@@ -38,7 +37,7 @@ import {
 
 const Dashboard = () => {
   const [dashboardData, setDashboardData] = useState({});
-  const [products, setProducts] = useState([]);
+  const [ setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [productList, setProductList] = useState([]);
   const [orders, setOrders] = useState([]); // Correctly set orders
@@ -67,13 +66,15 @@ const Dashboard = () => {
 
     fetchDashboardData();
   }, []);
+useEffect(() => {
   const fetchAndCalculateSales = async () => {
     try {
       const ordersResponse = await fetchDataFromApi("/api/order");
 
       if (ordersResponse && Array.isArray(ordersResponse)) {
         setOrders(ordersResponse); // Setting the orders to state
-        const totalSales = calculateTotalSales(ordersResponse); // Passing the fetched orders to the function
+         calculateTotalSales(ordersResponse); // Passing the fetched orders to the function
+        setTotalSales(totalSales); // Assuming you want to set the calculated total sales to state
       } else {
         console.error("Invalid order data:", ordersResponse);
       }
@@ -81,6 +82,9 @@ const Dashboard = () => {
       console.error("Error fetching orders:", error);
     }
   };
+
+  fetchAndCalculateSales();
+}, [fetchAndCalculateSales]); // Add necessary dependencies here, or leave empty for once-on-mount behavior
 
   // Updated calculateTotalSales function
   const calculateTotalSales = (orders) => {
@@ -96,9 +100,7 @@ const Dashboard = () => {
   };
 
   // Use the function
-  useEffect(() => {
-    fetchAndCalculateSales();
-  }, [fetchAndCalculateSales]);
+
 
   useEffect(() => {
     context.setProgress(40);

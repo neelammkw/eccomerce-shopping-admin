@@ -12,7 +12,7 @@ const Users = () => {
   const context = useContext(MyContext);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showBy, setShowBy] = useState(10);
+  const [showBy] = useState(10);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");

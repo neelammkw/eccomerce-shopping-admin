@@ -2,8 +2,6 @@ import React, { useEffect, useContext, useState } from 'react';
 import { MyContext } from '../../App';
 import { useNavigate } from 'react-router-dom'; 
 import { postData } from "../../utils/api";
-import axios from 'axios'; 
-import Logo from '../../assets/images/logo.png';
 import patern from '../../assets/images/pattern.png';
 import { MdEmail, MdPhone } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';

@@ -16,7 +16,6 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { fetchDataFromApi, deleteProduct, fetchCategories } from "../../utils/api";
 import { MyContext } from "../../App";
-import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const context = useContext(MyContext);

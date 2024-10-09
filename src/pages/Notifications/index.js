@@ -14,6 +14,8 @@ import {
   Avatar,
 } from "@mui/material";
 import { NotificationsContext } from "../../App";
+import { useCallback } from "react";
+
 
 const NotificationDetails = () => {
   const { Id } = useParams(); // Fetch the notification ID from the route params
@@ -22,26 +24,28 @@ const NotificationDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const markAsRead = async () => {
-    try {
-      await updateNotificationStatus(`/api/notifications/${Id}`, {
-        status: "read",
-      });
-      setNotification((prevNotification) => ({
-        ...prevNotification,
-        status: "read",
-      }));
-      setNotifications((prevNotifications) =>
-        prevNotifications.map((notif) =>
-          notif._id === Id ? { ...notif, status: "read" } : notif
-        )
-      );
-      setUnreadNotificationsCount((prevCount) => prevCount - 1);
-    } catch (error) {
-      console.error("Error marking notification as read:", error);
-    }
-  };
+  const markAsRead = useCallback(async () => {
+  try {
+    await updateNotificationStatus(`/api/notifications/${Id}`, {
+      status: "read",
+    });
 
+    setNotification((prevNotification) => ({
+      ...prevNotification,
+      status: "read",
+    }));
+
+    setNotifications((prevNotifications) =>
+      prevNotifications.map((notif) =>
+        notif._id === Id ? { ...notif, status: "read" } : notif
+      )
+    );
+
+    setUnreadNotificationsCount((prevCount) => prevCount - 1);
+  } catch (error) {
+    console.error("Error marking notification as read:", error);
+  }
+}, [Id, updateNotificationStatus]);
   useEffect(() => {
     const fetchNotificationDetails = async () => {
       try {

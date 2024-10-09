@@ -19,20 +19,19 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const ProductUpload = () => {
   const [categoryVal, setCategoryVal] = useState("");
-  const [subCatVal, setSubCategoryVal] = useState("");
+  const [ setSubCategoryVal] = useState("");
   const [isfeatured, setIsFeatured] = useState(false);
   const [rating, setRatingValue] = useState(1);
-  const [images, setImages] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [ setImages] = useState([]);
+  const [ setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const productImages = useRef();
-  const history = useNavigate();
 
   const [files, setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
-  const [productImagesArr, setProductImagesArr] = useState([]);
+  const [ setProductImagesArr] = useState([]);
   const [formField, setFormField] = useState({
     name: "",
     images: [],
@@ -55,7 +54,7 @@ const ProductUpload = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [formdata, setFormData] = useState(new FormData());
+  const [ setFormData] = useState(new FormData());
 
   const postData = async (url, formData) => {
     try {
@@ -160,14 +159,7 @@ try {
     }
   };
 
-  const addProductImages = () => {
-    setProductImagesArr((prevArray) => [
-      ...prevArray,
-      productImages.current.value,
-    ]);
-    productImages.current.value = "";
-  };
-
+  
   const handleChangeBrand = (event) => {
     setFormField((prevFormField) => ({
       ...prevFormField,
@@ -253,7 +245,7 @@ try {
 
     try {
       
-      const res = await postProduct("/api/products/create", formField);
+       await postProduct("/api/products/create", formField);
 
       setSnackbarMessage("Product Uploaded!");
       setSnackbarSeverity("success");

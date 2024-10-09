@@ -15,13 +15,12 @@ import { NotificationsContext } from "../../App";
 
 const NotificationsList = () => {
   const context = useContext(MyContext);
-  const { user } = useContext(OrdersContext);
-  const { setNotifications, setUnreadNotificationsCount } =
+  const { setUnreadNotificationsCount } =
     useContext(NotificationsContext);
   const [notifications, setNotification] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [showBy, setShowBy] = useState(10);
+  const [showBy] = useState(10);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");

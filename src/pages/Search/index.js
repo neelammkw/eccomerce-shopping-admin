@@ -11,7 +11,7 @@ import { MdDelete } from "react-icons/md";
 const SearchResults = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [showBy, setShowBy] = useState(5); // Show 5 products per page
+  const [showBy] = useState(5); // Show 5 products per page
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const context = useContext(MyContext); // Assuming baseUrl and delete function are in context

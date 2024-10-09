@@ -4,7 +4,6 @@ import { MdDelete, MdWidgets } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SnackbarProvider, useSnackbar } from "notistack";
@@ -22,7 +21,7 @@ const SubCategory = () => {
   const [categories, setCategories] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -110,7 +109,7 @@ const SubCategory = () => {
     fetchCategories("/api/categories").then((res) => {
       setAllCategories(res);
     });
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, context]);
 
   const handlePageChange = (event, value) => {
     context.setProgress(10);
