@@ -29,7 +29,7 @@ const ProductEdit = () => {
   const [subCatVal, setSubCategoryVal] = useState("");
   const [isfeatured, setIsfeatured] = useState(false);
   const [rating, setRatingValue] = useState(1);
-  const [images, setImages] = useState([]);
+  const [ setImages] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [files, setFiles] = useState([]);

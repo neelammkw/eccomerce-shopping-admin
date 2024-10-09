@@ -17,7 +17,7 @@ import { OrdersContext } from "../../App";
 
 const Orders = () => {
   const context = useContext(MyContext);
-  const { orders, setOrders, orderStats, updateOrderStats,user, setUser } = useContext(OrdersContext); 
+  const { orders, setOrders,  updateOrderStats } = useContext(OrdersContext); 
   const [currentPage, setCurrentPage] = useState(1);
   const [showBy, setShowBy] = useState(10);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -34,7 +34,7 @@ const Orders = () => {
       setOrders(res);
       updateOrderStats(res);  
     });
-  }, []);
+  }, [context, setOrders, updateOrderStats]);
 
   // Handle status change for an order
   const handleStatusChange = async (orderId, status) => {
