@@ -50,7 +50,7 @@ const Dashboard = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [totalSales, setTotalSales] = useState(0); // Add this state to store total sales
+  const [ setTotalSales] = useState(0); // Add this state to store total sales
 
 
   const context = useContext(MyContext);
