@@ -136,7 +136,7 @@ const Login = () => {
           console.log(response.data); // Handle login success (e.g., save token, redirect)
           // navigate('/dashboard');
           setTimeout(() => {
-            window.location.href = "/dashboard";
+            window.location.href = "/";
           }, 2000);
         } else {
           toast.error(
