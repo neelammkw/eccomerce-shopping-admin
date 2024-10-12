@@ -26,6 +26,7 @@ import Rating from "@mui/material/Rating";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { Navigate } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
 
 import {
   MdTrendingUp,
@@ -40,7 +41,6 @@ import {
 const Dashboard = () => {
   const context = useContext(MyContext);
   const [dashboardData, setDashboardData] = useState({});
-  const [ setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [productList, setProductList] = useState([]);
   const [orders, setOrders] = useState([]); // Correctly set orders
@@ -53,19 +53,18 @@ const Dashboard = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [ setTotalSales] = useState(0); // Add this state to store total sales
+  // const [ setTotalSales] = useState(0); // Add this state to store total sales
+    const [ progress, setProgress] = useState(0);
 
-  if (!context.user) {
-    // Redirect to login if not logged in
-    return <Navigate to="/login" replace />;
-  }
-
+ 
   useEffect(() => {
     // Consolidated fetch for both orders and dashboard data
     const fetchDashboardData = async () => {
+      setProgress(30); 
       try {
         const response = await fetchDataFromApi("/api/data");
         setDashboardData(response);
+        setProgress(100); 
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -79,8 +78,8 @@ useEffect(() => {
       const ordersResponse = await fetchDataFromApi("/api/order");
       if (ordersResponse && Array.isArray(ordersResponse)) {
         setOrders(ordersResponse); // Set orders
-        const totalSalesValue = calculateTotalSales(ordersResponse); // Calculate sales
-        setTotalSales(totalSalesValue); // Set total sales in state
+        // const totalSalesValue = calculateTotalSales(ordersResponse); // Calculate sales
+        // setTotalSales(totalSalesValue); // Set total sales in state
       } else {
         console.error("Invalid order data:", ordersResponse);
       }
@@ -90,34 +89,19 @@ useEffect(() => {
   };
 
   fetchAndCalculateSales();
+
 }, []); // Dependency array here controls when this effect runs
 
-  // Updated calculateTotalSales function
-  const calculateTotalSales = (orders) => {
-    const shippedAndDeliveredOrders = orders.filter(
-      (order) =>
-        order.orderStatus === "shipped" || order.orderStatus === "delivered"
-    );
-
-    return shippedAndDeliveredOrders.reduce(
-      (total, order) => total + (order.totalAmount || 0), // Handle cases where totalAmount is missing or undefined
-      0
-    );
-  };
-
+  
   // Use the function
 
   useEffect(() => {
     const fetchProducts = async () => {
-      context.setProgress(40);
-      try {
         const res = await fetchDataFromApi("/api/products");
         setProductList(res);
         const uniqueBrands = [...new Set(res.map((item) => item.brand))];
         setBrands(uniqueBrands);
-      } finally {
-        context.setProgress(100);
-      }
+     
     };
 
     fetchProducts();
@@ -135,6 +119,21 @@ useEffect(() => {
     };
     fetchCategory();
   }, []);
+const calculateTotalSales = (orders) => {
+    const shippedAndDeliveredOrders = orders.filter(
+      (order) =>
+        order.orderStatus === "shipped" || order.orderStatus === "delivered"
+    );
+
+    return shippedAndDeliveredOrders.reduce(
+      (total, order) => total + (order.totalAmount || 0), // Handle cases where totalAmount is missing or undefined
+      0
+    );
+  };
+ if (!context.user) {
+    // Redirect to login if not logged in
+    return <Navigate to="/login" replace />;
+  }
 
   const deleteProductHandler = (id) => {
     context.setProgress(40);
@@ -211,6 +210,12 @@ useEffect(() => {
 
   return (
     <>
+    <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
+
       <div className="right-content w-100 bottomEle">
         <div className="card shadow">
           <div className="mc-breadcrumb">
@@ -492,7 +497,7 @@ useEffect(() => {
                           <div className="imgWrapper">
                             <div className="img">
                               <img
-                                src={`${context.baseUrl}uploads/${item.images[0]}`}
+                                src={`https://ecommerce-shopping-server.onrender.com/uploads/${item.images[0]}`}
                                 alt="shop"
                                 className="w-100"
                               />
