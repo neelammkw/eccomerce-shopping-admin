@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base URL
-const BASE_URL = process.env.REACT_APP_BASE_URL || "https://ecommerce-shopping-server.onrender.com" ;
+const BASE_URL = "https://ecommerce-shopping-server.onrender.com" ;
 
 // Fetch categories
 export const fetchCategories = async (url) => {
