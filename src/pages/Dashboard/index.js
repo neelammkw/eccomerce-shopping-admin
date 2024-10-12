@@ -25,6 +25,8 @@ import Pagination from "@mui/material/Pagination";
 import Rating from "@mui/material/Rating";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { Navigate } from "react-router-dom";
+
 import {
   MdTrendingUp,
   MdTrendingDown,
@@ -36,6 +38,7 @@ import {
 } from "react-icons/md";
 
 const Dashboard = () => {
+  const context = useContext(MyContext);
   const [dashboardData, setDashboardData] = useState({});
   const [ setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -52,8 +55,10 @@ const Dashboard = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [ setTotalSales] = useState(0); // Add this state to store total sales
 
-
-  const context = useContext(MyContext);
+  if (!context.user) {
+    // Redirect to login if not logged in
+    return <Navigate to="/login" replace />;
+  }
 
   useEffect(() => {
     // Consolidated fetch for both orders and dashboard data
@@ -102,18 +107,22 @@ useEffect(() => {
 
   // Use the function
 
-
   useEffect(() => {
-    context.setProgress(40);
-    window.scrollTo(0, 0);
-    fetchDataFromApi("/api/products").then((res) => {
-      context.setProgress(100);
-      setProductList(res);
-      // setProducts(res);
-      const uniqueBrands = [...new Set(res.map((item) => item.brand))]; // Fetching unique brands
-      setBrands(uniqueBrands);
-    });
+    const fetchProducts = async () => {
+      context.setProgress(40);
+      try {
+        const res = await fetchDataFromApi("/api/products");
+        setProductList(res);
+        const uniqueBrands = [...new Set(res.map((item) => item.brand))];
+        setBrands(uniqueBrands);
+      } finally {
+        context.setProgress(100);
+      }
+    };
+
+    fetchProducts();
   }, []);
+
 
   useEffect(() => {
     const fetchCategory = async () => {
