@@ -25,7 +25,7 @@ const Sidebar = () => {
       [index]: !prevState[index],
     }));
   };
-const logout = () => {
+  const logout = () => {
     localStorage.clear();
     context.setIsLogin(false);
     context.setUser(null);

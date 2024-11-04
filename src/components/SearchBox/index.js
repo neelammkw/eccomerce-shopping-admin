@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { IoIosSearch } from "react-icons/io";
-const SearchBox = ( ) => {
-    const [query, setQuery] = useState("");
+const SearchBox = () => {
+  const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleSearch = () => {
@@ -15,9 +15,9 @@ const SearchBox = ( ) => {
       setQuery("");
     }
   };
-    return (
-<div className="searchBox position-relative d-flex margin-left-4 align-items-center">
-<input
+  return (
+    <div className="searchBox position-relative d-flex margin-left-4 align-items-center">
+      <input
         type="text"
         placeholder="Search for Products..."
         className="searchInput"
@@ -26,10 +26,14 @@ const SearchBox = ( ) => {
         onKeyDown={(e) => e.key === "Enter" && handleSearch()} // Trigger search on Enter key
       />
       <Button onClick={handleSearch}>
-        {isLoading ? <CircularProgress size={24} /> : <IoIosSearch className="searchIcon" />}
+        {isLoading ? (
+          <CircularProgress size={24} />
+        ) : (
+          <IoIosSearch className="searchIcon" />
+        )}
       </Button>
-</div>
-    )
-}
+    </div>
+  );
+};
 
 export default SearchBox;

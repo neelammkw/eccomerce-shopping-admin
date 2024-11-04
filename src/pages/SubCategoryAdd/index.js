@@ -36,7 +36,6 @@ const SubCategoryAdd = () => {
 
   const addSubCategory = async (e) => {
     e.preventDefault();
-
     if (formfield.subcat !== "" && formfield.category !== "") {
       setLoading(true);
       try {

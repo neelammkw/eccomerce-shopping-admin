@@ -20,7 +20,8 @@ const MyAccount = () => {
     } else {
       navigate("/sign-in");
     }
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleTabChange = (event, newValue) => {
     setValue(newValue);

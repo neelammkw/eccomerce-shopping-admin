@@ -23,7 +23,8 @@ const Users = () => {
       context.setProgress(100);
       setUsers(res);
     });
-  }, [context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

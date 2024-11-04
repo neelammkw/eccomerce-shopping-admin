@@ -138,7 +138,8 @@ const ProductItem = (props) => {
 
   useEffect(() => {
     checkIfInList();
-  }, [user, props.product, myList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div

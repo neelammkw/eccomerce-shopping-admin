@@ -36,7 +36,8 @@ const SearchResults = () => {
     };
 
     fetchSearchResults();
-  }, [location.search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

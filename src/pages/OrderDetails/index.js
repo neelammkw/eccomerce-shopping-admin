@@ -41,7 +41,8 @@ const OrderDetails = () => {
     };
 
     fetchOrderData();
-  }, [orderId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDialogOpen = (product) => {
     setSelectedProduct(product);

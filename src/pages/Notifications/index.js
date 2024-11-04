@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import {
-  fetchDataFromApi,
-  updateNotificationStatus,
-} from "../../utils/api";
+import { fetchDataFromApi, updateNotificationStatus } from "../../utils/api";
 import {
   CircularProgress,
   Typography,
@@ -16,36 +13,37 @@ import {
 import { NotificationsContext } from "../../App";
 import { useCallback } from "react";
 
-
 const NotificationDetails = () => {
   const { Id } = useParams(); // Fetch the notification ID from the route params
   const [notification, setNotification] = useState(null);
-  const { setNotifications, setUnreadNotificationsCount } = useContext(NotificationsContext);
+  const { setNotifications, setUnreadNotificationsCount } =
+    useContext(NotificationsContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const markAsRead = useCallback(async () => {
-  try {
-    await updateNotificationStatus(`/api/notifications/${Id}`, {
-      status: "read",
-    });
+    try {
+      await updateNotificationStatus(`/api/notifications/${Id}`, {
+        status: "read",
+      });
 
-    setNotification((prevNotification) => ({
-      ...prevNotification,
-      status: "read",
-    }));
+      setNotification((prevNotification) => ({
+        ...prevNotification,
+        status: "read",
+      }));
 
-    setNotifications((prevNotifications) =>
-      prevNotifications.map((notif) =>
-        notif._id === Id ? { ...notif, status: "read" } : notif
-      )
-    );
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notif) =>
+          notif._id === Id ? { ...notif, status: "read" } : notif
+        )
+      );
 
-    setUnreadNotificationsCount((prevCount) => prevCount - 1);
-  } catch (error) {
-    console.error("Error marking notification as read:", error);
-  }
-}, [Id,  setNotifications, setUnreadNotificationsCount]);
+      setUnreadNotificationsCount((prevCount) => prevCount - 1);
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     const fetchNotificationDetails = async () => {
       try {
@@ -65,7 +63,8 @@ const NotificationDetails = () => {
     };
 
     fetchNotificationDetails();
-  }, [Id, markAsRead]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading) {
     return <CircularProgress />;
@@ -133,13 +132,16 @@ const NotificationDetails = () => {
                         Order Details
                       </Typography>
                       <Typography>
-                        <strong>Order ID:</strong> {notification?.order?._id || "N/A"}
+                        <strong>Order ID:</strong>{" "}
+                        {notification?.order?._id || "N/A"}
                       </Typography>
                       <Typography>
-                        <strong>Order Status:</strong> {notification?.order?.orderStatus || "N/A"}
+                        <strong>Order Status:</strong>{" "}
+                        {notification?.order?.orderStatus || "N/A"}
                       </Typography>
                       <Typography>
-                        <strong>Total Amount:</strong> {notification?.order?.totalAmount || "N/A"}
+                        <strong>Total Amount:</strong>{" "}
+                        {notification?.order?.totalAmount || "N/A"}
                       </Typography>
                     </>
                   ) : null}
@@ -152,18 +154,23 @@ const NotificationDetails = () => {
                       </Typography>
                       <Typography>
                         <strong>Product Name:</strong>{" "}
-                        <Link to={`/product-details/${notification?.product?._id}`}>
+                        <Link
+                          to={`/product-details/${notification?.product?._id}`}
+                        >
                           {notification?.product?.name || "N/A"}
                         </Link>
                       </Typography>
                       <Typography>
-                        <strong>Brand:</strong> {notification?.product?.brand || "N/A"}
+                        <strong>Brand:</strong>{" "}
+                        {notification?.product?.brand || "N/A"}
                       </Typography>
                       <Typography>
-                        <strong>Number of Reviews:</strong> {notification?.product?.numReviews || "N/A"}
+                        <strong>Number of Reviews:</strong>{" "}
+                        {notification?.product?.numReviews || "N/A"}
                       </Typography>
                       <Typography>
-                        <strong>Discount Price:</strong> ₹{notification?.product?.discountPrice || "N/A"}
+                        <strong>Discount Price:</strong> ₹
+                        {notification?.product?.discountPrice || "N/A"}
                       </Typography>
                     </>
                   ) : null}

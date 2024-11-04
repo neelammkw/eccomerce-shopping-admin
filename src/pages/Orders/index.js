@@ -34,7 +34,8 @@ const Orders = () => {
       setOrders(res);
       updateOrderStats(res);  
     });
-  }, [context, setOrders, updateOrderStats]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Handle status change for an order
   const handleStatusChange = async (orderId, status) => {

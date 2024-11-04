@@ -109,7 +109,8 @@ const SubCategory = () => {
     fetchCategories("/api/categories").then((res) => {
       setAllCategories(res);
     });
-  }, [currentPage, itemsPerPage, context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = (event, value) => {
     context.setProgress(10);

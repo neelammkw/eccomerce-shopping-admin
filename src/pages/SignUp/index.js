@@ -42,7 +42,8 @@ const SignUp = () => {
   useEffect(() => {
     context.setHideSideandHeader(true);
     window.scrollTo(0, 0);
-  }, [context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const focusInput = (index) => {
     setInputIndex(index);

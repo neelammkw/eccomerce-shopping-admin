@@ -99,6 +99,7 @@ function App() {
       const storedUser = localStorage.getItem("user");
       return storedUser ? JSON.parse(storedUser) : null;
     });
+  const baseUrl = "https://ecommerce-shopping-server.onrender.com/";
 
     const updateOrderStats = (orders) => {
       const pending = orders.filter(
@@ -157,6 +158,7 @@ function App() {
       setProgress,
       user,
       setUser,
+      baseUrl,
     };
 
     return (

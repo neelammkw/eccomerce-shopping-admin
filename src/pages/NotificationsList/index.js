@@ -17,7 +17,6 @@ const NotificationsList = () => {
   const { setUnreadNotificationsCount } =
     useContext(NotificationsContext);
   const [notifications, setNotification] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [showBy] = useState(10);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -37,7 +36,8 @@ const NotificationsList = () => {
         setNotification([]);
         context.setProgress(100);
       });
-  }, [context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Handle notification read status change
   const handleMarkAsRead = async (Id) => {

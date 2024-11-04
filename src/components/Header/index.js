@@ -91,7 +91,8 @@ const Header = () => {
     };
 
     fetchNotifications();
-  }, [setNotifications, setUnreadNotificationsCount]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Fetch pending orders
   useEffect(() => {
@@ -123,7 +124,8 @@ const Header = () => {
     intervalId = setInterval(fetchOrders, 10000);
 
     return () => clearInterval(intervalId); // Clear interval on component unmount
-  }, [orders, setOrders, updateOrderStats, setPendingOrdersCount, setPendingOrders]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

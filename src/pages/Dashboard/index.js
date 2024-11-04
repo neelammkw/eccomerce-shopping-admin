@@ -497,7 +497,7 @@ const calculateTotalSales = (orders) => {
                           <div className="imgWrapper">
                             <div className="img">
                               <img
-                                src={`https://ecommerce-shopping-server.onrender.com/uploads/${item.images[0]}`}
+                                src={`${context.baseUrl}uploads/${item.images[0]}`}
                                 alt="shop"
                                 className="w-100"
                               />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { MyContext } from "../../App";
 import {
   MenuItem,
   Rating,
@@ -12,8 +13,6 @@ import { RxDividerVertical } from "react-icons/rx";
 import { fetchCategories, getProductById, updateProduct } from "../../utils/api";
 import { FaRegImages } from "react-icons/fa";
 import axios from "axios";
-import { MyContext } from "../../App";
-
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,6 +21,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const ProductEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const context = useContext(MyContext);
 
   const [categoryVal, setCategoryVal] = useState("");
   const [subCategories, setSubCategories] = useState([]);
@@ -29,12 +29,11 @@ const ProductEdit = () => {
   const [isfeatured, setIsfeatured] = useState(false);
   const [rating, setRatingValue] = useState(1);
   // const [ setImages] = useState([]);
-  // const [ setImageUrls] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [ setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
-  const context = useContext(MyContext);
-
   const [formField, setFormField] = useState({
     name: "",
     images: [],
@@ -57,6 +56,7 @@ const ProductEdit = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [ setFormData] = useState(new FormData());
 
   const postData = async (url, formData) => {
     try {
@@ -144,9 +144,7 @@ const ProductEdit = () => {
         setCategoryVal(data.category);
         setIsfeatured(data.isfeatured);
         setRatingValue(data.rating);
-        
-        // Set image previews with context.baseUrl
-    setPreviews(data.images.map((img) => `${context.baseUrl}uploads/${img}`));
+        setImageUrls(data.images);
 
         if (data.category) {
           const subCategoriesData = await fetchCategories(`/api/subcategories/`);
@@ -162,9 +160,7 @@ const ProductEdit = () => {
     };
 
     fetchProduct();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]); // context.baseUrl is not included here
-
+  }, [id]);
 
   useEffect(() => {
     setFormField({
@@ -187,7 +183,7 @@ const ProductEdit = () => {
     });
 
     //  setImages([]);
-    // setImageUrls([]);
+    setImageUrls([]);
     //  setFiles([]);
     setImgFiles(null);
     setPreviews([]);
@@ -623,7 +619,17 @@ const formData = new FormData();
                 <div className="row">
                 <p>* Re- Upload Images and Upload Product *</p>
                   <div className="imgUploadBOx d-flex align-ite   ms-center">
-                    
+                    // {imageUrls?.length !== 0 &&
+                    //   imageUrls.map((image, index) => {
+                    //     return (
+                    //       <div className="uploadBox" key={index}>
+                    //         <img
+                    //           src={`${context.baseUrl}uploads/${image}`}
+                    //           className="w-100" alt="img"
+                    //         />
+                    //       </div>
+                    //     );
+                    //   })}
 
                     {previews?.length !== 0 &&
                       previews.map((image, index) => {

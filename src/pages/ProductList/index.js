@@ -48,7 +48,8 @@ const ProductList = () => {
       setCategories(res);
       setTotalCategories(res.length); // Dynamically setting total categories
     });
-  }, [context]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);

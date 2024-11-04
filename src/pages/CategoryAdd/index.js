@@ -86,7 +86,8 @@ const CategoryAdd = () => {
     return () => {
       objectUrls.forEach((url) => URL.revokeObjectURL(url));
     };
-  }, [imgFiles, files.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgFiles]);
 
   const removeImage = (index) => {
     const newFiles = files.filter((_, i) => i !== index);

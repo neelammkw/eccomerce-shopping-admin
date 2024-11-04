@@ -25,7 +25,6 @@ const ProductUpload = () => {
   const [ setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-
   const [files, setFiles] = useState([]);
   const [imgFiles, setImgFiles] = useState();
   const [previews, setPreviews] = useState([]);
@@ -122,7 +121,8 @@ const removeImage = (index) => {
         URL.revokeObjectURL(objectUrls[i]);
       };
     }
-  }, [imgFiles, files.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgFiles]);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -135,6 +135,7 @@ const removeImage = (index) => {
     };
 
     fetchCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangeCategory = async (event) => {

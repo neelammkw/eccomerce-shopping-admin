@@ -58,7 +58,7 @@ const Login = () => {
     });
   };
   const signInWithGoogle = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
@@ -231,7 +231,8 @@ const Login = () => {
                 </div>
                 <Button
                   variant="outlined"
-                  className="w-100 btn-lg loginwithGoogle btn-big mt-2" onClick={signInWithGoogle}
+                  className="w-100 btn-lg loginwithGoogle btn-big mt-2"
+                  onClick={signInWithGoogle}
                 >
                   <img src={Googlelogo} alt="google" width="30px" /> &nbsp; Sign
                   In With Google

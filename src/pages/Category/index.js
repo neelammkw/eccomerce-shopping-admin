@@ -4,7 +4,11 @@ import { MdDelete, MdWidgets } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { fetchCategories, editCategories, deleteCategories } from "../../utils/api";
+import {
+  fetchCategories,
+  editCategories,
+  deleteCategories,
+} from "../../utils/api";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SnackbarProvider, useSnackbar } from "notistack";
 import { MyContext } from "../../App";
@@ -17,15 +21,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { FaRegImages } from "react-icons/fa";
 import axios from "axios";
 
-
 const Category = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [categories, setCategories] = useState([]);
- const [ setAllCategories] = useState([]);
+  const [setAllCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
-
   const [openViewDialog, setOpenViewDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState({ images: [] });
@@ -40,7 +42,9 @@ const Category = () => {
 
   const handleEditOpen = (category) => {
     setSelectedCategory(category);
-    setPreviews(category.images.map((img) => `${context.baseUrl}uploads/${img}`));
+    setPreviews(
+      category.images.map((img) => `${context.baseUrl}uploads/${img}`)
+    );
     setOpenEditDialog(true);
   };
 
@@ -86,7 +90,10 @@ const Category = () => {
     setPreviews(imgArr.map((file) => URL.createObjectURL(file)));
 
     try {
-      const response = await postFile(`${context.baseUrl}api/categories/upload`, formdata);
+      const response = await postFile(
+        `${context.baseUrl}api/categories/upload`,
+        formdata
+      );
       if (response && response.status === 200) {
         const uploadedImages = response.data.map((file) => file.filename);
         setSelectedCategory((prev) => ({
@@ -116,7 +123,10 @@ const Category = () => {
   const handleEditSave = async () => {
     setIsLoading(true);
     try {
-      await editCategories(`/api/categories/${selectedCategory._id}`, selectedCategory);
+      await editCategories(
+        `/api/categories/${selectedCategory._id}`,
+        selectedCategory
+      );
       enqueueSnackbar("Category edited successfully!", { variant: "success" });
       setOpenEditDialog(false);
       fetchCategories("/api/categories").then((res) => {
@@ -124,7 +134,9 @@ const Category = () => {
         // setAllCategories(res);
       });
     } catch (error) {
-      enqueueSnackbar("Error editing category. Please try again.", { variant: "error" });
+      enqueueSnackbar("Error editing category. Please try again.", {
+        variant: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -139,32 +151,25 @@ const Category = () => {
         setAllCategories(res);
       });
     } catch (error) {
-      enqueueSnackbar("Error deleting category. Please try again.", { variant: "error" });
+      enqueueSnackbar("Error deleting category. Please try again.", {
+        variant: "error",
+      });
     }
   };
 
   useEffect(() => {
     fetchCategories("/api/categories").then((res) => {
-      context.setProgress(20);
       setCategories(res);
-      setAllCategories(res);
-      context.setProgress(100);
+       setAllCategories(res);
     });
-  }, [currentPage, itemsPerPage, context, setAllCategories]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePageChange = (event, value) => {
     context.setProgress(10);
     setCurrentPage(value);
     context.setProgress(100);
   };
-  // const handleSelectChange = (e) => {
-  //   const { value } = e.target;
-  //   setSelectedCategory((prev) => ({
-  //     ...prev,
-  //     parentCategory: value,
-  //   }));
-  // };
-
 
   return (
     <SnackbarProvider maxSnack={3}>
@@ -207,7 +212,7 @@ const Category = () => {
               <thead className="thead-dark">
                 <tr>
                   <th>ID</th>
-                  <th style={{ width: '100px' }}>Images</th>
+                  <th style={{ width: "100px" }}>Images</th>
                   <th>Category Name</th>
                   <th>Color</th>
                   <th>Action</th>
@@ -222,8 +227,8 @@ const Category = () => {
                   .map((category, index) => (
                     <tr key={category._id}>
                       <td>
-                        <Checkbox />
-                        #{(currentPage - 1) * itemsPerPage + index + 1}
+                        <Checkbox />#
+                        {(currentPage - 1) * itemsPerPage + index + 1}
                       </td>
                       <td>
                         <div className="d-flex productBox align-items-center">
@@ -289,9 +294,15 @@ const Category = () => {
         <Dialog open={openViewDialog} onClose={handleDialogClose}>
           <DialogTitle>View Category</DialogTitle>
           <DialogContent>
-            <p><strong>ID:</strong> {selectedCategory?._id}</p>
-            <p><strong>Name:</strong> {selectedCategory?.name}</p>
-            <p><strong>Color:</strong> {selectedCategory?.color}</p>
+            <p>
+              <strong>ID:</strong> {selectedCategory?._id}
+            </p>
+            <p>
+              <strong>Name:</strong> {selectedCategory?.name}
+            </p>
+            <p>
+              <strong>Color:</strong> {selectedCategory?.color}
+            </p>
             <div className="d-flex productBox align-items-center">
               {Array.isArray(selectedCategory?.images) &&
                 selectedCategory.images.map((image, index) => (
@@ -317,7 +328,7 @@ const Category = () => {
         <Dialog open={openEditDialog} onClose={handleDialogClose}>
           <DialogTitle>Edit Category</DialogTitle>
           <DialogContent>
-          <TextField
+            <TextField
               margin="dense"
               label="Category Name"
               type="text"
@@ -335,21 +346,17 @@ const Category = () => {
               value={selectedCategory?.color || ""}
               onChange={handleEditChange}
             />
-          <p className="mt-4 ">*Change the Uploaded Image and Submit *</p>
+            <p className="mt-4 ">*Change the Uploaded Image and Submit *</p>
 
             <div className="imgUploadBox d-flex align-items-center mt-2">
               {previews?.length !== 0 &&
                 previews?.map((img, index) => (
                   <div className="uploadBox" key={index}>
-                    <img src={img} className="w-100" alt={img}/>
+                    <img src={img} className="w-100" alt={img} />
                   </div>
                 ))}
               <div className="uploadBox">
-                <input
-                  type="file"
-                  onChange={onChangeFile}
-                  name="images"
-                />
+                <input type="file" onChange={onChangeFile} name="images" />
                 <div className="info">
                   <FaRegImages />
                   <h5>Image Upload </h5>
@@ -363,7 +370,11 @@ const Category = () => {
             </Button>
             <Button onClick={handleEditSave} color="primary">
               {isLoading ? (
-                <CircularProgress color="inherit" size={20} className="loader" />
+                <CircularProgress
+                  color="inherit"
+                  size={20}
+                  className="loader"
+                />
               ) : (
                 "Submit"
               )}
