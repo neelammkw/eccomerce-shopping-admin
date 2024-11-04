@@ -24,7 +24,6 @@ import axios from "axios";
 const Category = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [categories, setCategories] = useState([]);
-  const [setAllCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(false);

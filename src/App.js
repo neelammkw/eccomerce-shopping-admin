@@ -4,6 +4,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
+import ScrollToTop from "./components/ScrollToTop";
 import Sidebar from "./components/Sidebar";
 import { createContext, useState, useEffect, useContext } from "react";
 import Login from "./pages/Login";
@@ -163,6 +164,7 @@ function App() {
 
     return (
       <BrowserRouter>
+      <ScrollToTop />  
         <OrdersContext.Provider
           value={{ orders, setOrders, orderStats, updateOrderStats }}
         >
