@@ -131,7 +131,6 @@ const Category = () => {
       setOpenEditDialog(false);
       fetchCategories("/api/categories").then((res) => {
         setCategories(res);
-        // setAllCategories(res);
       });
     } catch (error) {
       enqueueSnackbar("Error editing category. Please try again.", {
@@ -148,7 +147,6 @@ const Category = () => {
       enqueueSnackbar("Category deleted successfully!", { variant: "success" });
       fetchCategories("/api/categories").then((res) => {
         setCategories(res);
-        setAllCategories(res);
       });
     } catch (error) {
       enqueueSnackbar("Error deleting category. Please try again.", {
@@ -159,8 +157,11 @@ const Category = () => {
 
   useEffect(() => {
     fetchCategories("/api/categories").then((res) => {
+    context.setProgress(20);
+
       setCategories(res);
-       setAllCategories(res);
+    context.setProgress(100);
+
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
