@@ -18,11 +18,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const ProductUpload = () => {
   const [categoryVal, setCategoryVal] = useState("");
-  const [ setSubCategoryVal] = useState("");
+  // Just keep the set function without the
+  const [, setSubCategoryVal] = useState(""); // Corrected initialization
+
   const [isfeatured, setIsFeatured] = useState(false);
   const [rating, setRatingValue] = useState(1);
-  const [ setImages] = useState([]);
-  const [ setImageUrls] = useState([]);
+  const [setImages] = useState([]);
+  const [setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [files, setFiles] = useState([]);
@@ -50,7 +52,7 @@ const ProductUpload = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [ setFormData] = useState(new FormData());
+  const [setFormData] = useState(new FormData());
 
   const postData = async (url, formData) => {
     try {
@@ -94,7 +96,7 @@ const ProductUpload = () => {
       console.error("Error uploading files", error);
     }
   };
-const removeImage = (index) => {
+  const removeImage = (index) => {
     const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
     const newFormdata = new FormData();
@@ -146,7 +148,7 @@ const removeImage = (index) => {
       category: value,
     }));
 
-try {
+    try {
       const data = await fetchCategories(`/api/subcategories/`);
       const filteredSubcategories = data.filter(
         (subcategory) => subcategory.category.name === value
@@ -157,7 +159,6 @@ try {
     }
   };
 
-  
   const handleChangeBrand = (event) => {
     setFormField((prevFormField) => ({
       ...prevFormField,
@@ -166,13 +167,14 @@ try {
   };
 
   const handleChangeSubCat = (event) => {
-    const { value } = event.target;
-    setSubCategoryVal(value);
-    setFormField((prevFormField) => ({
-      ...prevFormField,
-      subCat: value,
-    }));
-  };
+  const { value } = event.target;
+  setSubCategoryVal(value); // Now this will work
+  setFormField((prevFormField) => ({
+    ...prevFormField,
+    subCat: value,
+  }));
+};
+
 
   const handleChangeFeatured = (event) => {
     setIsFeatured(event.target.value);
@@ -242,8 +244,7 @@ try {
     formData.append("isFeatured", formField.isFeatured);
 
     try {
-      
-       await postProduct("/api/products/create", formField);
+      await postProduct("/api/products/create", formField);
 
       setSnackbarMessage("Product Uploaded!");
       setSnackbarSeverity("success");
@@ -383,17 +384,15 @@ try {
                         className="w-100 select"
                         onChange={handleChangeSubCat}
                       >
-                       {subCategories.map((subCat) => (
-                <MenuItem key={subCat._id} value={subCat.subcat}>
-                  {subCat.subcat}
-                </MenuItem>
-              ))}
- 
-                       
+                        {subCategories.map((subCat) => (
+                          <MenuItem key={subCat._id} value={subCat.subcat}>
+                            {subCat.subcat}
+                          </MenuItem>
+                        ))}
                       </Select>
                     </div>
                   </div>
-                   <div className="col-xl-6">
+                  <div className="col-xl-6">
                     <div className="mc-label-field-group label-col">
                       <label className="mc-label-field-title">Colors</label>
                       <input
@@ -406,7 +405,7 @@ try {
                       />
                     </div>
                   </div>
-                   <div className="col-xl-6">
+                  <div className="col-xl-6">
                     <div className="mc-label-field-group label-col">
                       <label className="mc-label-field-title" id="brand">
                         Brand
@@ -421,12 +420,13 @@ try {
                         {/* Replace with your brand options */}
                         <MenuItem value="Lyra">Lyra</MenuItem>
                         <MenuItem value="Amazon">Amazon</MenuItem>
-                        <MenuItem value="Gucci">Gucci</MenuItem> <MenuItem value="Raymond">Raymond</MenuItem>
-                         <MenuItem value="Titan">Titan</MenuItem>
+                        <MenuItem value="Gucci">Gucci</MenuItem>{" "}
+                        <MenuItem value="Raymond">Raymond</MenuItem>
+                        <MenuItem value="Titan">Titan</MenuItem>
                       </Select>
                     </div>
                   </div>
-                 
+
                   <div className="col-xl-6">
                     <div className="mc-label-field-group label-col">
                       <label className="mc-label-field-title">Sizes</label>
@@ -440,7 +440,7 @@ try {
                       />
                     </div>
                   </div>
-                   <div className="col-xl-6">
+                  <div className="col-xl-6">
                     <div className="mc-label-field-group label-col">
                       <label className="mc-label-field-title">
                         Is Featured
@@ -572,7 +572,7 @@ try {
                   </div>
                 </div>
               </div>
-             
+
               <div className="mc-card mt-4">
                 <div className="mc-card-header">
                   <h4 className="mc-card-title">Product Images</h4>
@@ -583,14 +583,18 @@ try {
                       previews?.map((img, index) => {
                         return (
                           <div className="uploadBox" key={index}>
-                            <img src={img} className="w-100" alt={`preview-${index}`} />
-                                <button
-                                  type="button"
-                                  className="cancel-btn"
-                                  onClick={() => removeImage(index)}
-                                >
-                                  <MdOutlineCancel/>
-                                </button>
+                            <img
+                              src={img}
+                              className="w-100"
+                              alt={`preview-${index}`}
+                            />
+                            <button
+                              type="button"
+                              className="cancel-btn"
+                              onClick={() => removeImage(index)}
+                            >
+                              <MdOutlineCancel />
+                            </button>
                           </div>
                         );
                       })}
