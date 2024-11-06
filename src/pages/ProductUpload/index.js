@@ -23,8 +23,8 @@ const ProductUpload = () => {
 
   const [isfeatured, setIsFeatured] = useState(false);
   const [rating, setRatingValue] = useState(1);
-  const [setImages] = useState([]);
-  const [setImageUrls] = useState([]);
+  // const [setImages] = useState([]);
+  // const [setImageUrls] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [files, setFiles] = useState([]);
@@ -52,7 +52,7 @@ const ProductUpload = () => {
   const [loading, setLoading] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-  const [setFormData] = useState(new FormData());
+  // const [setFormData] = useState(new FormData());
 
   const postData = async (url, formData) => {
     try {
@@ -80,7 +80,7 @@ const ProductUpload = () => {
       }
       setImgFiles(files);
       setFiles(imgArr);
-      setFormData(formdata);
+      //  setFormData(formdata);
 
       setFormField((prevFormField) => ({
         ...prevFormField,
@@ -88,6 +88,11 @@ const ProductUpload = () => {
       }));
       const response = await postData(apiEndPoint, formdata);
       if (response && response.status === 200) {
+        const uploadedImages = response.data.map((file) => file.filename);
+        setFormField((prev) => ({
+          ...prev,
+          images: [...prev.images, ...uploadedImages],
+        }));
         console.log("Files uploaded successfully", response.data);
       } else {
         console.error("File upload failed", response);
@@ -101,7 +106,7 @@ const ProductUpload = () => {
     setFiles(newFiles);
     const newFormdata = new FormData();
     newFiles.forEach((file) => newFormdata.append("images", file));
-    setFormData(newFormdata);
+    // setFormData(newFormdata);
     setFormField((prevFormField) => ({
       ...prevFormField,
       images: newFiles,
@@ -269,8 +274,9 @@ const ProductUpload = () => {
         sizes: "",
         weight: "",
       });
-      setImages([]);
-      setImageUrls([]);
+      // setImages([]);
+      // setImageUrls([]);
+      setPreviews([]);
     } catch (error) {
       setLoading(false);
       setSnackbarMessage(error.message);

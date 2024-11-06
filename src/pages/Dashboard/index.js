@@ -144,7 +144,7 @@ const calculateTotalSales = (orders) => {
         setSnackbarSeverity("success");
         setSnackbarOpen(true);
         fetchDataFromApi("/api/products").then((res) => {
-          setProductList(res.data);
+          setProductList(res);
         });
       })
       .catch((error) => {
@@ -166,7 +166,8 @@ const calculateTotalSales = (orders) => {
   const totalSales = calculateTotalSales(orders);
 
   const filteredProducts = productList.filter(
-    (product) =>
+    (product) => {
+      return (
       (showSearch
         ? [
             product.name,
@@ -178,7 +179,7 @@ const calculateTotalSales = (orders) => {
           )
         : true) &&
       (showByCat ? product.category === showByCat : true) &&
-      (showBrand ? product.brand === showBrand : true)
+      (showBrand ? product.brand === showBrand : true) ); }
   );
   const handlePageChange = (event, value) => {
     context.setProgress(10);
