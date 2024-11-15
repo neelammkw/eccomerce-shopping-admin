@@ -68,40 +68,45 @@ const ProductUpload = () => {
   };
 
   const onChangeFile = async (e, apiEndPoint) => {
-    try {
-      const files = e.target.files;
-      const formdata = new FormData();
-      setImgFiles(e.target.files);
-      const imgArr = [];
-      for (var i = 0; i < files.length; i++) {
-        const file = files[i];
-        imgArr.push(file);
-        formdata.append(`images`, file);
-      }
-      setImgFiles(files);
-      setFiles(imgArr);
-      //  setFormData(formdata);
+  try {
+    const files = e.target.files;
+    const formdata = new FormData();
+    const imgArr = Array.from(files);
 
-      setFormField((prevFormField) => ({
-        ...prevFormField,
-        images: imgArr,
+    // Add files to FormData
+    imgArr.forEach((file) => formdata.append("images", file));
+
+    // Update the state with selected files
+    setImgFiles(files);
+    setFiles(imgArr);
+
+    // Update formField with selected images
+    setFormField((prevFormField) => ({
+      ...prevFormField,
+      images: imgArr,
+    }));
+
+    // Send the files to the server
+    const response = await postData(apiEndPoint, formdata);
+    console.log(response.data); // Debug the response
+
+    if (response && response.status === 200) {
+      // Update the state with uploaded image filenames
+      const uploadedImages = response.data.images; // Use response.data.images directly
+      setFormField((prev) => ({
+        ...prev,
+        images: [...prev.images, ...uploadedImages],
       }));
-      const response = await postData(apiEndPoint, formdata);
-      if (response && response.status === 200) {
-        const uploadedImages = response.data.map((file) => file.filename);
-        setFormField((prev) => ({
-          ...prev,
-          images: [...prev.images, ...uploadedImages],
-        }));
-        console.log("Files uploaded successfully", response.data);
-      } else {
-        console.error("File upload failed", response);
-      }
-    } catch (error) {
-      console.error("Error uploading files", error);
+
+      console.log("Files uploaded successfully:", uploadedImages);
+    } else {
+      console.error("File upload failed:", response);
     }
-  };
-  const removeImage = (index) => {
+  } catch (error) {
+    console.error("Error uploading files:", error);
+  }
+};
+const removeImage = (index) => {
     const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
     const newFormdata = new FormData();

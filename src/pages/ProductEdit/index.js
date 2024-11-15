@@ -72,44 +72,45 @@ const ProductEdit = () => {
     }
   };
 
-  const onChangeFile = async (e, apiEndPoint) => {
-    try {
-      const files = e.target.files;
-      const formdata = new FormData();
-      setImgFiles(files);
-       const imgArr = [];
-    for (let i = 0; i < files.length; i++) {
-      imgArr.push(files[i]);
-      formdata.append("images", files[i]);
-    }
-      // setFiles(imgArr);
-      // setFormData(formdata);
+ const onChangeFile = async (e, apiEndPoint) => {
+  try {
+    const files = e.target.files;
+    const formdata = new FormData();
 
-      // imgArr.forEach((file) => formdata.append("images", file));
+    // Prepare FormData with files
+    const imgArr = Array.from(files);
+    imgArr.forEach((file) => formdata.append("images", file));
 
-      // setFormField((prevFormField) => ({
-      //   ...prevFormField,
-      //   images: imgArr,
-      // }));
+    // Update the previews state
     setPreviews(imgArr.map((file) => URL.createObjectURL(file)));
 
-      const response = await postData(apiEndPoint, formdata);
-      if (response?.status === 200) {
-        const uploadedImages = response.data.map((file) => file.filename);
-        setFormField((prev) => ({
-          ...prev,
-          images: [...prev.images, ...uploadedImages],
-        }));
-        console.log("Files uploaded successfully", response.data);
-      } else {
-        console.error("File upload failed", response);
-      }
-    } catch (error) {
-      console.error("Error uploading files", error);
-    }
-  };
+    // Send the FormData to the API
+    const response = await postData(apiEndPoint, formdata);
 
-  useEffect(() => {
+    // Log the response for debugging
+    console.log("Server Response:", response);
+
+    if (response?.status === 200) {
+      // Handle response structure dynamically
+      const uploadedImages = Array.isArray(response.data?.images)
+        ? response.data.images
+        : response.data.files?.map((file) => file.filename) || [];
+
+      // Update the form field with uploaded images
+      setFormField((prev) => ({
+        ...prev,
+        images: [...(prev.images || []), ...uploadedImages],
+      }));
+
+      console.log("Files uploaded successfully:", uploadedImages);
+    } else {
+      console.error("File upload failed:", response);
+    }
+  } catch (error) {
+    console.error("Error uploading files:", error);
+  }
+};
+ useEffect(() => {
     if (!imgFiles) return;
     let tmp = [];
     for (let i = 0; i < imgFiles.length; i++) {
