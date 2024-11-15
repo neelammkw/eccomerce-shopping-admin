@@ -92,10 +92,10 @@ const ProductEdit = () => {
 
     if (response?.status === 200) {
       // Handle response structure dynamically
-      const uploadedImages = Array.isArray(response.data?.images)
-        ? response.data.images
-        : response.data.files?.map((file) => file.filename) || [];
-
+      // const uploadedImages = Array.isArray(response.data?.images)
+      //   ? response.data.images
+      //   : response.data.files?.map((file) => file.filename) || [];
+const uploadedImages = response.data.images;
       // Update the form field with uploaded images
       setFormField((prev) => ({
         ...prev,
